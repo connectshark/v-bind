@@ -1,0 +1,1 @@
+import{_ as o,d as s,o as c,c as n,a as e,b as a,w as _,e as r}from"./index-BMNEpIk3.js";const l={},d={class:"text-center"},i=e("h1",{class:"text-3xl/loose"},"404",-1);function u(x,f){const t=s("router-link");return c(),n("section",d,[i,e("p",null,[a(t,{class:"underline",to:"/"},{default:_(()=>[r("回首頁")]),_:1})])])}const m=o(l,[["render",u]]);export{m as default};
