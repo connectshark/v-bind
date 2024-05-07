@@ -1,48 +1,80 @@
-# vue-tailwind-template
-[![build status](https://github.com/connectshark/vue-tailwind-template/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/connectshark/vue-tailwind-template/actions/workflows/deploy.yml)
-[![create-release](https://github.com/connectshark/vue-tailwind-template/actions/workflows/create-release.yml/badge.svg?branch=main)](https://github.com/connectshark/vue-tailwind-template/actions/workflows/create-release.yml)
-[![GitHub last commit](https://img.shields.io/github/last-commit/connectshark/vue-tailwind-template.svg?style=flat)](https://github.com/connectshark/vue-tailwind-template)
-![GitHub stars](https://img.shields.io/github/stars/connectshark/vue-tailwind-template.svg?style=social&label=Stars&style=plastic)
+# v-bind
+[![build status](https://github.com/connectshark/v-bind/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/connectshark/v-bind/actions/workflows/deploy.yml)
+[![create-release](https://github.com/connectshark/v-bind/actions/workflows/create-release.yml/badge.svg?branch=main)](https://github.com/connectshark/v-bind/actions/workflows/create-release.yml)
+[![GitHub last commit](https://img.shields.io/github/last-commit/connectshark/v-bind.svg?style=flat)](https://github.com/connectshark/v-bind)
+![GitHub stars](https://img.shields.io/github/stars/connectshark/v-bind.svg?style=social&label=Stars&style=plastic)
 
 
 ![https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)
 ![https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D)
 ![https://img.shields.io/badge/tailwindcss-35495E?style=for-the-badge&logo=tailwindcss&logoColor=38BCF8](https://img.shields.io/badge/tailwindcss-35495E?style=for-the-badge&logo=tailwindcss&logoColor=38BCF8)
 
-快速開發模板架構
 
 ## 目錄
 
-- [專案已安裝內容](#專案已安裝內容)
-- [使用模板的優勢](#使用模板的優勢)
-  - [CSS主色設定](#css主色設定)
-  - [自動部署至gh-page](#自動部署至gh-page)
-  - [資料結構為主的路由](#資料結構為主的路由)
+- [截圖](#截圖)
+- [專案目的](#專案目的)
 - [版權](#版權)
-## 專案已安裝內容
 
-- vite
-- vue3
-- pinia
-- vue-router4
-- tailwindcss
-- github action自動部署至 `gh-page`
+## 截圖
 
-## 使用模板的優勢
+![](/readme/cover.png)
 
-### CSS主色設定
+## 專案目的
 
-使用TailwindCSS官方建議方式設定好CSS變數，可一次調整專案色票。
+使用`v-bind`替換原本使用`props`的習慣。
 
-`src/index.css`
+父層資料傳遞到元件中，原本是物件型態的資料不用在父層解構，直接使用`v-bind`綁定資料，就可以直接在元件中提取物件的屬性使用。
 
-### 自動部署至gh-page
+```js
+// 原始資料
 
-已設定github action功能，在推送新的內容時會觸發部署功能。
+const list = [
+  {
+    "id": 1,
+    "name": "John Doe",
+    "occupation": "Software Engineer",
+    "company": "ABC Tech",
+    "email": "john.doe@example.com",
+    "phone": "+1 (555) 123-4567",
+    "address": {
+      "street": "123 Main St",
+      "city": "Anytown",
+      "state": "CA",
+      "zip": "12345",
+      "country": "USA"
+    }
+  },
+  ...
+]
+```
 
-### 資料結構為主的路由
 
-將`vue-router`搭配插件修改成以**資料結構**為主的路由設定，所有路由都放置在`src/pages`的資料夾中，預設找不到頁面會進入`[...slug].vue`的頁面。
+```html
+// index.vue
+<tbody>
+  <tr class=" bg-indigo-100 odd:bg-indigo-50" v-for="item in list">
+    <Card v-bind="item" />
+  </tr>
+</tbody>
+```
+
+```html
+// Card.vue
+<template>
+  <td>{{ name }}</td>
+  <td>{{ occupation }}</td>
+  <td>{{ email }}</td>
+</template>
+
+<script setup>
+defineProps({
+  name: String,
+  occupation: String,
+  email: String
+})
+</script>
+```
 
 ## 版權
 
